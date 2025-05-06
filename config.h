@@ -170,6 +170,8 @@ static unsigned int defaultattr = 11;
  */
 static uint forcemousemod = ShiftMask;
 
+#define MODKEY Mod1Mask
+#define TERMMOD (ControlMask|ShiftMask)
 /*
  * Internal mouse shortcuts.
  * Beware that overloading Button1 will disable the selection.
@@ -177,15 +179,15 @@ static uint forcemousemod = ShiftMask;
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
-	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
-	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
-	{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
-	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
+//	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
+//	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
+//	{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
+//	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
+	{ MODKEY,           	Button4, kscrollup,        {.i = 3} },
+	{ MODKEY,           	Button5, kscrolldown,        {.i = 3} },
 };
 
 /* Internal keyboard shortcuts. */
-#define MODKEY Mod1Mask
-#define TERMMOD (ControlMask|ShiftMask)
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
@@ -202,7 +204,11 @@ static Shortcut shortcuts[] = {
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
 	{ TERMMOD,              XK_K,       zoom,           {.f = +1} }, 
-	{ TERMMOD,              XK_J,       zoom,           {.f = -1} }};
+	{ TERMMOD,              XK_J,       zoom,           {.f = -1} },
+	{ MODKEY,              XK_k,           kscrollup,       {.i = 1} },
+	{ MODKEY,              XK_j,           kscrolldown,      {.i = 1} },
+	{ MODKEY,              XK_u,           kscrollup,       {.i = -1} },
+	{ MODKEY,              XK_d,           kscrolldown,      {.i = -1} },};
 
 /*
  * Special keys (change & recompile st.info accordingly)
